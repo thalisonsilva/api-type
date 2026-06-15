@@ -1,35 +1,35 @@
-# Cliente de API em TypeScript (React/Next.js)
+# TypeScript API Client (React/Next.js)
 
-Exemplo genérico de integração com uma API REST usando TypeScript, pensado para projetos React ou Next.js.
+Generic example of a REST API integration using TypeScript, built for React or Next.js projects.
 
-## 📁 Arquivos
+## 📁 Files
 
-- **`api-client.ts`** — Cliente de API com funções para GET, POST, PUT e DELETE.
-- **`useApiItems.ts`** — Hook customizado (`useApiItems`) para consumir a API dentro de componentes React.
+- **`api-client.ts`** — API client with functions for GET, POST, PUT, and DELETE.
+- **`useApiItems.ts`** — Custom React hook (`useApiItems`) to consume the API inside components.
 
-## ⚙️ Configuração
+## ⚙️ Setup
 
-1. Defina a URL da sua API criando um arquivo `.env.local` na raiz do projeto:
+1. Set your API URL by creating a `.env.local` file at the project root:
 
 ```env
-NEXT_PUBLIC_API_URL=https://sua-api.com
+NEXT_PUBLIC_API_URL=https://your-api.com
 ```
 
-2. Ajuste a interface `ApiItem` em `api-client.ts` com os campos reais que sua API retorna. Exemplo atual:
+2. Update the `ApiItem` interface in `api-client.ts` with the fields your API actually returns. Current example:
 
 ```ts
 export interface ApiItem {
   id: number;
-  nome: string;
-  descricao?: string;
+  name: string;
+  description?: string;
 }
 ```
 
-3. Ajuste os endpoints (`/items`, `/items/:id`) dentro de `api-client.ts` para corresponderem à sua API.
+3. Update the endpoints (`/items`, `/items/:id`) in `api-client.ts` to match your API.
 
-## 🚀 Como usar
+## 🚀 Usage
 
-### Buscar dados em um componente
+### Fetching data in a component
 
 ```tsx
 "use client";
@@ -39,15 +39,15 @@ import { useApiItems } from "./useApiItems";
 export default function ItemsList() {
   const { data, loading, error, refetch } = useApiItems();
 
-  if (loading) return <p>Carregando...</p>;
-  if (error) return <p>Erro: {error}</p>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
-      <button onClick={refetch}>Atualizar</button>
+      <button onClick={refetch}>Refresh</button>
       <ul>
         {data.map((item) => (
-          <li key={item.id}>{item.nome}</li>
+          <li key={item.id}>{item.name}</li>
         ))}
       </ul>
     </div>
@@ -55,24 +55,24 @@ export default function ItemsList() {
 }
 ```
 
-### Criar, atualizar ou excluir itens
+### Creating, updating, or deleting items
 
 ```ts
 import { api } from "./api-client";
 
-// Criar
-await api.createItem({ nome: "Novo item" });
+// Create
+await api.createItem({ name: "New item" });
 
-// Atualizar
-await api.updateItem(1, { nome: "Item atualizado" });
+// Update
+await api.updateItem(1, { name: "Updated item" });
 
-// Excluir
+// Delete
 await api.deleteItem(1);
 ```
 
-## 🔐 Autenticação (opcional)
+## 🔐 Authentication (optional)
 
-Se sua API exigir autenticação por token, adicione o header dentro da função `request` em `api-client.ts`:
+If your API requires token-based authentication, add the header inside the `request` function in `api-client.ts`:
 
 ```ts
 headers: {
@@ -81,8 +81,8 @@ headers: {
 }
 ```
 
-## 📌 Próximos passos
+## 📌 Next steps
 
-- Substituir `API_BASE_URL` pela URL real da sua API.
-- Ajustar os tipos (`ApiItem`) e endpoints conforme a documentação da sua API.
-- Adicionar tratamento de erros específico, se necessário (ex: 401, 404).
+- Replace `API_BASE_URL` with your actual API URL.
+- Update the types (`ApiItem`) and endpoints according to your API documentation.
+- Add specific error handling if needed (e.g., 401, 404).
