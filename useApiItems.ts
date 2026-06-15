@@ -5,40 +5,36 @@
  * ===========================================
  */
 
-import { useState, useEffect } from "react";
 import { api, ApiItem } from "./api-client";
 
 interface UseApiItemsResult {
   data: ApiItem[];
   loading: boolean;
   error: string | null;
-  refetch: () => void;
+  refetch: () => Promise<void>;
 }
 
 export function useApiItems(): UseApiItemsResult {
-  const [data, setData] = useState<ApiItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  let data: ApiItem[] = [];
+  let loading = true;
+  let error: string | null = null;
 
-  const fetchData = async () => {
-    setLoading(true);
-    setError(null);
+  const refetch = async () => {
+    loading = true;
+    error = null;
 
     try {
-      const items = await api.getItems();
-      setData(items);
+      data = await api.getItems();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro desconhecido");
+      error = err instanceof Error ? err.message : "Erro desconhecido";
     } finally {
-      setLoading(false);
+      loading = false;
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  void refetch();
 
-  return { data, loading, error, refetch: fetchData };
+  return { data, loading, error, refetch };
 }
 
 /**
