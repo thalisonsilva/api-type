@@ -7,6 +7,7 @@ Generic example of a REST API integration using TypeScript, built for React or N
 - **`api-client.ts`** — API client with functions for GET, POST, PUT, and DELETE.
 - **`useApiItems.ts`** — Custom React hook (`useApiItems`) to consume the API inside components.
 
+
 ## ⚙️ Setup
 
 1. Set your API URL by creating a `.env.local` file at the project root:
