@@ -8,7 +8,7 @@
 
 // 1) Configuração base da API
 // Troque pela URL real da sua API quando tiver
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.exemplo.com";
+const API_BASE_URL = (typeof process !== 'undefined' && process.env.NEXT_PUBLIC_API_URL) || "https://api.exemplo.com";
 
 // 2) Tipos genéricos de exemplo
 // Substitua pelos campos reais que sua API retorna
