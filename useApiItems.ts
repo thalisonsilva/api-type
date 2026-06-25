@@ -5,7 +5,7 @@
  * ===========================================
  */
 
-import { api, ApiItem } from "./api-client";
+import { api, ApiItem } from "./API_BASE_URL";
 
 interface UseApiItemsResult {
   data: ApiItem[];
@@ -36,6 +36,8 @@ export function useApiItems(): UseApiItemsResult {
 
   return { data, loading, error, refetch };
 }
+
+"user client";
 
 /**
  * ===========================================
