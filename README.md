@@ -13,7 +13,7 @@ Generic example of a REST API integration using TypeScript, built for React or N
 1. Set your API URL by creating a `.env.local` file at the project root:
 
 ```env
-NEXT_PUBLIC_API_URL=https://your-api.com
+NEXT_PUBLIC_API_URL=https://your-api.com //"http://localhost:3000/api"
 ```
 
 2. Update the `ApiItem` interface in `api-client.ts` with the fields your API actually returns. Current example:
